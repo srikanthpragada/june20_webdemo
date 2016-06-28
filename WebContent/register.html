@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registration</title>
+<link  href="mystyles.css" rel="stylesheet" />
+<script>
+   function validate() 
+   {
+	   var name = document.getElementById("txtName");
+	   var mobile = document.getElementById("txtMobile");
+	   
+	   if (name.value == mobile.value)
+	   {	 
+		   alert("Sorry! Name and mobile cannot be same!");
+		   return false;  // submission of form is cancelled 
+	   }
+	   else
+		   return true;
+   }
+</script>
+</head>
+<body>
+  <h2>Registration</h2>
+  <form action="register" onSubmit="return validate()">
+  
+   <span class="label">Name</span> 
+   <br/>
+   <input type="text" id="txtName"  name="txtName" required="required" />
+   <p/>
+   <span class="label"> Mobile</span>
+    <br/>
+   <input type="text" id="txtMobile"  name="txtMobile"  required="required" />
+   <p/>
+   <input type="submit" value="Register" />
+  
+  </form>
+</body>
+</html>
