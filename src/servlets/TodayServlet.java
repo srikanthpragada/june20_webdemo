@@ -15,6 +15,7 @@ public class TodayServlet extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Date d = new Date();
+		response.setContentType("text/html");
 		PrintWriter pw = response.getWriter();
 		
 		pw.println("<h1>" + d.toString() + "<h1>");
