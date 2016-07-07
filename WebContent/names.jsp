@@ -12,12 +12,12 @@
   <%
      String name = request.getParameter("name");
   
-     ArrayList<String> names = (ArrayList<String>) session.getAttribute("names");
+     ArrayList<String> names = (ArrayList<String>) application.getAttribute("names");
      
      if (names == null)
      {
     	 names = new ArrayList<String>();
-    	 session.setAttribute("names", names);
+    	 application.setAttribute("names", names);
      }
      
      names.add(name);
