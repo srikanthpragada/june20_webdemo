@@ -9,7 +9,14 @@ import javax.sql.rowset.CachedRowSet;
 
 import oracle.jdbc.rowset.OracleCachedRowSet;
 
-public class JobsHandler extends SimpleTagSupport {
+public class Jobs2Handler extends SimpleTagSupport {
+	
+	private String title;
+	
+	public void setTitle(String title)
+	{
+		this.title = title;
+	}
 
 	@Override
 	public void doTag() throws JspException, IOException {
@@ -23,7 +30,8 @@ public class JobsHandler extends SimpleTagSupport {
 			crs.setUsername("hr");
 			crs.setPassword("hr");
 			crs.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-			crs.setCommand("select * from jobs");
+			crs.setCommand("select * from jobs where upper(job_title) like ?");
+			crs.setString(1,  "%" + title.toUpperCase() + "%");
 			crs.execute();
 			
 			out.println("<table border='1'> <tr><th>Title </th><th> Min Salary </th></tr>");

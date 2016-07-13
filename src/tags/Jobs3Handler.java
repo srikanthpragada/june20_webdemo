@@ -4,18 +4,21 @@ import java.io.IOException;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
+import javax.servlet.jsp.PageContext;
+import javax.servlet.jsp.tagext.JspFragment;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 import javax.sql.rowset.CachedRowSet;
 
 import oracle.jdbc.rowset.OracleCachedRowSet;
 
-public class JobsHandler extends SimpleTagSupport {
+public class Jobs3Handler extends SimpleTagSupport {
 
 	@Override
 	public void doTag() throws JspException, IOException {
 
 		JspWriter out = getJspContext().getOut();
-		out.println("<h2>Jobs</h2>");
+		PageContext  ctx = (PageContext) getJspContext();
+		JspFragment body = this.getJspBody();
 
 		try {
 
@@ -26,15 +29,19 @@ public class JobsHandler extends SimpleTagSupport {
 			crs.setCommand("select * from jobs");
 			crs.execute();
 			
-			out.println("<table border='1'> <tr><th>Title </th><th> Min Salary </th></tr>");
-			
 			while ( crs.next())
 			{
-				out.println("<tr><td>" + crs.getString("job_title")
-				    + "</td><td>" + crs.getString("min_salary") + "</td></tr>");
+                 ctx.setAttribute("id", crs.getString("job_id"));
+                 ctx.setAttribute("title", crs.getString("job_title"));
+                 ctx.setAttribute("min", crs.getInt("min_salary"));
+                 ctx.setAttribute("max", crs.getInt("max_salary"));
+                 
+                 if (body != null)
+                	 body.invoke(out); // process body and send output to writer 
+                
 			}
 			
-			out.println("</table>");
+
 			crs.close();
 
 		} catch (Exception ex) {
