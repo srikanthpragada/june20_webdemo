@@ -7,8 +7,8 @@
   <ns1:parameter name="dotNetSoapEncFix" value="true"/>
   <ns1:parameter name="enableNamespacePrefixOptimization" value="false"/>
   <ns1:parameter name="sendXMLDeclaration" value="true"/>
-  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl"/>
+  <ns1:parameter name="sendXsiTypes" value="true"/>
   <ns1:requestFlow>
    <ns1:handler type="java:org.apache.axis.handlers.JWSHandler">
     <ns1:parameter name="scope" value="session"/>
@@ -47,11 +47,11 @@
  <ns1:service name="HelloService" provider="java:RPC" style="wrapped" use="literal">
   <ns1:operation name="wish" qname="ns3:wish" returnQName="ns3:wishReturn" returnType="xsd:string" soapAction="" xmlns:ns3="http://ws" xmlns:xsd="http://www.w3.org/2001/XMLSchema"/>
   <ns1:parameter name="allowedMethods" value="wish"/>
-  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="wsdlPortType" value="HelloService"/>
-  <ns1:parameter name="className" value="ws.HelloService"/>
-  <ns1:parameter name="wsdlServicePort" value="HelloService"/>
+  <ns1:parameter name="typeMappingVersion" value="1.2"/>
   <ns1:parameter name="schemaQualified" value="http://ws"/>
+  <ns1:parameter name="wsdlServicePort" value="HelloService"/>
+  <ns1:parameter name="className" value="ws.HelloService"/>
   <ns1:parameter name="wsdlTargetNamespace" value="http://ws"/>
   <ns1:parameter name="wsdlServiceElement" value="HelloServiceService"/>
  </ns1:service>

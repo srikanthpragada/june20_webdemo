@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import javax.jws.WebMethod;
 import javax.jws.WebService;
 
-@WebService(targetNamespace="com.st") 
+@WebService(targetNamespace="com.st.books") 
 public class BookService {
 
 	 @WebMethod
