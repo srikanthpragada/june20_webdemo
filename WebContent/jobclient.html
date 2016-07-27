@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title></title>
+<script src="jquery-3.1.0.js"></script>
+<script>
+  function getJob() 
+  {
+	  $.getJSON("http://localhost:8888/restdemo/rest/jobs/" + $("#jobid").val(), {}, showResult);
+
+  }
+  function showResult(job)
+  {
+	  alert(job.title);
+  }
+  
+  function getJobs() 
+  {
+	  $.getJSON("http://localhost:8888/restdemo/rest/jobs",{}, showJobs);
+  }
+  
+  function showJobs(jobs)
+  {
+	  var output = "<ul>";
+	  $.each(jobs,
+			   function (idx, job)
+			   {
+		           output += "<li>" + job.title + "</li>"; 
+			   }
+	  );
+	  
+	  output += "</ul>";
+	  $("#jobs").html(output);
+	  
+  }
+  
+  function deleteJob() 
+  {
+	  $.ajax( 
+     	 {
+           url : "http://localhost:8888/restdemo/rest/jobs/" + $("#deleteJobid").val(),
+	       method : "delete",
+	       complete : showDeleteResult
+	   	 }
+	  );
+  }
+  
+  function showDeleteResult(result)
+  {
+	  if (result.status != 404)
+		  alert("Job Deleted Successfully!");
+	  else
+		  alert("Sorry! Either job is not found or some other error!");
+		    
+  }
+</script>
+</head>
+<body>
+<h2>Get Job Details</h2>
+Job Id : <input type="text" id="jobid"/>
+<button onclick="getJob()">Get Details </button>
+
+<hr/>
+
+<h2>Delete Job</h2>
+Job Id : <input type="text" id="deleteJobid"/>
+<button onclick="deleteJob()">Delete Job</button>
+
+<hr/>
+
+<h2>Get All Jobs</h2>
+<button onclick="getJobs()">Get All Jobs </button>
+<div id="jobs">
+</div>
+
+
+</body>
+</html>
